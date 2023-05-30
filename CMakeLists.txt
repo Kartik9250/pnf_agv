@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(aruco_navigation)
+project(pnf_agv)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -52,6 +52,7 @@ add_message_files(
   FILES
   Holo_agv.msg
   Motor_desc.msg
+  Motor_driver.msg
 )
 
 ## Generate services in the 'srv' folder

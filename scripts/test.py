@@ -1,39 +1,105 @@
 #!/usr/bin/env python3
 import rospy
-from aruco_navigation.msg import Holo_agv, Motor_desc
+from pnf_agv.msg import Holo_agv
 from geometry_msgs.msg import Twist
-vel_x = 0
-vel_y = 0
-def cmd_cb(data):
-    global vel_x, vel_y
-    vel_x = data.linear.x * 200
-    
-def talker():
-    pub = rospy.Publisher('pnf_agv', Holo_agv)
-    sub = rospy.Subscriber("/cmd_vel", Twist, cmd_cb)
-    rospy.init_node('pgv_controller', anonymous=True)
-    r = rospy.Rate(100) #10hz
-    msg = Holo_agv()
-    
 
-    while not rospy.is_shutdown():
-        if vel_x < 0:
-          msg.motor_A.dor = 1
-        else:
-            msg.motor_A.dor = 0  
-        msg.motor_A.pwm = int(vel_x)
+WHEEL_SEPARATION_WIDTH = 0.28
+WHEEL_SEPARATION_LENGTH = 0.28
+WHEEL_GEOMETRY = (WHEEL_SEPARATION_WIDTH + WHEEL_SEPARATION_LENGTH) / 2
+WHEEL_RADIUS = 0.08
+
+class controller:
+    def __init__(self):
+        self.front_left = 0
+        self.front_right = 0
+        self.back_left = 0
+        self.back_right = 0
+
+        self.abs_front_left = 0
+        self.abs_front_right = 0
+        self.abs_back_left = 0
+        self.abs_back_right = 0
+
+    def cmd_cb(self,data):
+        x = data.linear.x
+        y = data.linear.y
+        rot = data.angular.z
+
+        self.front_left = int((x - y - rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
+        self.front_right = int((x + y + rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
+        self.back_left = int((x + y - rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
+        self.back_right = int((x - y + rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
+
         
-        # msg.motor_B.pwm = 150
-        # msg.motor_B.dor = 0
-        # msg.motor_C.pwm = 200
-        # msg.motor_C.dor = 1
-        # msg.motor_D.pwm = 11
-        # msg.motor_D.dor = 1
-        pub.publish(msg)
-        print("message published")
-        r.sleep()
+        
+        self.abs_front_right = max(min(abs(self.front_right), 255), 0)
+        self.abs_front_left = max(min(abs(self.front_left), 255), 0)
+        self.abs_back_right = max(min(abs(self.back_right), 255), 0)
+        self.abs_back_left = max(min(abs(self.back_left), 255), 0)
+
+        
+    def main(self):
+        pub = rospy.Publisher('agv_controller', Holo_agv)
+        sub = rospy.Subscriber("/cmd_vel", Twist, self.cmd_cb)
+        rospy.init_node('pgv_controller', anonymous=True)
+        r = rospy.Rate(100) #10hz
+        msg = Holo_agv()
+        
+
+        while not rospy.is_shutdown():
+            
+            if self.abs_front_left and self.abs_front_right == 0:
+                msg.motor_driver_front.stby = 0
+            else:
+                msg.motor_driver_front.stby = 1
+
+            msg.motor_driver_front.motor_right.pwm = self.abs_front_right
+
+            if self.front_right > 0:
+                msg.motor_driver_front.motor_right.IN1 = 1
+                msg.motor_driver_front.motor_right.IN2 = 0
+            else:
+                msg.motor_driver_front.motor_right.IN1 = 0
+                msg.motor_driver_front.motor_right.IN2 = 1
+
+            msg.motor_driver_front.motor_left.pwm = self.abs_front_left
+            if self.front_left > 0:
+                msg.motor_driver_front.motor_left.IN1 = 1
+                msg.motor_driver_front.motor_left.IN2 = 0
+            else:
+                msg.motor_driver_front.motor_left.IN1 = 0
+                msg.motor_driver_front.motor_left.IN2 = 1
+
+
+
+            if self.abs_back_left and self.abs_back_right == 0:
+                msg.motor_driver_back.stby = 0
+            else:
+                msg.motor_driver_back.stby = 1
+
+            msg.motor_driver_back.motor_right.pwm = self.abs_back_right
+            if self.back_right > 0:
+                msg.motor_driver_back.motor_right.IN1 = 1
+                msg.motor_driver_back.motor_right.IN2 = 0
+            else:
+                msg.motor_driver_back.motor_right.IN1 = 0
+                msg.motor_driver_back.motor_right.IN2 = 1
+
+            msg.motor_driver_back.motor_left.pwm = self.abs_back_left
+            if self.back_left > 0:
+                msg.motor_driver_back.motor_left.IN1 = 1
+                msg.motor_driver_back.motor_left.IN2 = 0
+            else:
+                msg.motor_driver_back.motor_left.IN1 = 0
+                msg.motor_driver_back.motor_left.IN2 = 1
+
+
+            pub.publish(msg)
+            print("message published")
+            r.sleep()
 
 if __name__ == '__main__':
+    obj = controller()
     try:
-        talker()
+        obj.main()
     except rospy.ROSInterruptException: pass

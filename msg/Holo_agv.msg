@@ -1,5 +1,4 @@
-# This message expresses the holonomic vehicle as combination of four motors(A,B,C,D)
-aruco_navigation/Motor_desc  motor_A
-aruco_navigation/Motor_desc  motor_B
-aruco_navigation/Motor_desc  motor_C
-aruco_navigation/Motor_desc  motor_D
+# This message expresses the holonomic vehicle as combination of four motors controlled by two motor drivers(mtr_dr_f, mtr_dr_b)
+
+pnf_agv/Motor_driver  motor_driver_front
+pnf_agv/Motor_driver  motor_driver_back

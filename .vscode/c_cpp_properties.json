@@ -6,6 +6,7 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
+        "/home/brad/pnf_ws/devel/include/**",
         "/home/brad/spbot_ws/devel/include/**",
         "/home/brad/anbot_ws/devel/include/**",
         "/home/brad/catkin_ws/devel/include/**",

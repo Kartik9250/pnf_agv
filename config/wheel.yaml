@@ -1,0 +1,5 @@
+pnf_agv:
+  seperation:
+    horizontal: 0.28
+    vertical: 0.28
+  wheel_diameter: 0.08
