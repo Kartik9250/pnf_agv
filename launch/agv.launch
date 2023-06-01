@@ -1,0 +1,5 @@
+<launch>
+<rosparam file="$(find pnf_agv)/config/wheel.yaml" command="load" />
+<node name="serial" type="serial_node.py" pkg="rosserial_arduino" />
+<node name="controller" type="test.py" pkg="pnf_agv" />
+</launch>
