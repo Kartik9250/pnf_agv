@@ -53,7 +53,6 @@ class controller:
             else:
                 msg.motor_driver_front.stby = 1
 
-            msg.motor_driver_front.motor_right.pwm = self.abs_front_right
 
             if self.front_right > 0:
                 msg.motor_driver_front.motor_right.IN1 = 1
@@ -61,14 +60,15 @@ class controller:
             else:
                 msg.motor_driver_front.motor_right.IN1 = 0
                 msg.motor_driver_front.motor_right.IN2 = 1
+            msg.motor_driver_front.motor_right.pwm = self.abs_front_right
 
-            msg.motor_driver_front.motor_left.pwm = self.abs_front_left
             if self.front_left > 0:
                 msg.motor_driver_front.motor_left.IN1 = 1
                 msg.motor_driver_front.motor_left.IN2 = 0
             else:
                 msg.motor_driver_front.motor_left.IN1 = 0
                 msg.motor_driver_front.motor_left.IN2 = 1
+            msg.motor_driver_front.motor_left.pwm = self.abs_front_left
 
 
 
@@ -77,21 +77,21 @@ class controller:
             else:
                 msg.motor_driver_back.stby = 1
 
-            msg.motor_driver_back.motor_right.pwm = self.abs_back_right
             if self.back_right > 0:
                 msg.motor_driver_back.motor_right.IN1 = 1
                 msg.motor_driver_back.motor_right.IN2 = 0
             else:
                 msg.motor_driver_back.motor_right.IN1 = 0
                 msg.motor_driver_back.motor_right.IN2 = 1
+            msg.motor_driver_back.motor_right.pwm = self.abs_back_right
 
-            msg.motor_driver_back.motor_left.pwm = self.abs_back_left
             if self.back_left > 0:
                 msg.motor_driver_back.motor_left.IN1 = 1
                 msg.motor_driver_back.motor_left.IN2 = 0
             else:
                 msg.motor_driver_back.motor_left.IN1 = 0
                 msg.motor_driver_back.motor_left.IN2 = 1
+            msg.motor_driver_back.motor_left.pwm = self.abs_back_left
 
 
             pub.publish(msg)
