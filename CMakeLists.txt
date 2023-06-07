@@ -53,6 +53,8 @@ add_message_files(
   Holo_agv.msg
   Motor_desc.msg
   Motor_driver.msg
+  redhead.msg
+  red_data.msg
 )
 
 ## Generate services in the 'srv' folder
