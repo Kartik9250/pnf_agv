@@ -21,7 +21,7 @@ def main():
         try:
             msg.redhead_data.tag = dm.tag_data(str(red_output)[2:4])
             msg.redhead_data.x_offset = float(dm.x_pos(str(red_output)[4:12]))
-            msg.redhead_data.y_offset = float(dm.y_pos(str(red_output)[12:16]))
+            # msg.redhead_data.y_offset = float(dm.y_pos(str(red_output)[12:16]))
             msg.redhead_data.theta_offset = float(dm.angle_degree(str(red_output)[16:20]))
             pub.publish(msg)
         except:

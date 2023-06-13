@@ -1,5 +1,8 @@
 <launch>
-<rosparam file="$(find pnf_agv)/config/wheel.yaml" command="load" />
-<node name="serial" type="serial_node.py" pkg="rosserial_arduino" />
-<node name="controller" type="test.py" pkg="pnf_agv" />
+<!-- <machine name="pi" address="192.168.151.172" password="raspberry" env-loader="/home/pi/pnf_agv/devel/env.sh" user="pi" timeout="50"/> -->
+<rosparam file="$(find pnf_agv)/config/wheel.yaml" command="load"/>
+<node name="pnfredhead" type="main.py" pkg="pnf_agv"/>
+<!-- <node name="pgvtest" type="control.py" pkg="pnf_agv"/> -->
+<!-- <node machine="pi" name="serial" type="serial_node.py" pkg="rosserial_arduino"/> -->
+<node name="controller" type="test.py" pkg="pnf_agv"/>
 </launch>
