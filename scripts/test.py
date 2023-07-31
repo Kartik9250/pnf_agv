@@ -25,10 +25,10 @@ class controller:
         y = data.linear.y
         rot = data.angular.z
 
-        self.front_left = int((x - y - rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
-        self.front_right = int((x + y + rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
-        self.back_left = int((x + y - rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
-        self.back_right = int((x - y + rot * WHEEL_GEOMETRY) / WHEEL_RADIUS)
+        self.front_left = int((x - y - rot * WHEEL_GEOMETRY^2) / WHEEL_RADIUS)
+        self.front_right = int((x + y + rot * WHEEL_GEOMETRY^2) / WHEEL_RADIUS)
+        self.back_left = int((x + y - rot * WHEEL_GEOMETRY^2) / WHEEL_RADIUS)
+        self.back_right = int((x - y + rot * WHEEL_GEOMETRY^2) / WHEEL_RADIUS)
 
         
         
