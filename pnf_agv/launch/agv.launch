@@ -1,0 +1,5 @@
+<launch>
+<node name="controller" type="test.py" pkg="pnf_agv"/>
+<node name="pgvtest" type="control2.py" pkg="pnf_agv"/> -->
+
+</launch>

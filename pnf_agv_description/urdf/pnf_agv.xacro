@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+<robot name="pnf_agv" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find pnf_agv_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find pnf_agv_description)/urdf/pnf_agv.trans" />
+<xacro:include filename="$(find pnf_agv_description)/urdf/pnf_agv.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="1.4822455483199973e-05 -0.00035296021677234593 0.040337564482692406" rpy="0 0 0"/>
+    <mass value="26.111655948076812"/>
+    <inertia ixx="0.307733" iyy="0.329895" izz="0.595999" ixy="1.9e-05" iyz="0.000543" ixz="-2.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_left_tyre_1">
+  <inertial>
+    <origin xyz="-0.01110924369747926 3.608224830031759e-16 -3.469446951953614e-17" rpy="0 0 0"/>
+    <mass value="1.1738875109403615"/>
+    <inertia ixx="0.000947" iyy="0.00056" izz="0.00056" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.11 -0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/front_left_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.11 -0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/front_left_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_right_tyre_1">
+  <inertial>
+    <origin xyz="0.01110924369747883 3.0531133177191805e-16 -3.0184188481996443e-16" rpy="0 0 0"/>
+    <mass value="1.1738875109403615"/>
+    <inertia ixx="0.000947" iyy="0.00056" izz="0.00056" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.11 -0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/front_right_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.11 -0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/front_right_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="back_left_tyre_1">
+  <inertial>
+    <origin xyz="-0.011109243697479274 -1.1102230246251565e-16 -8.673617379884035e-17" rpy="0 0 0"/>
+    <mass value="1.1738875109403615"/>
+    <inertia ixx="0.000947" iyy="0.00056" izz="0.00056" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.11 0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/back_left_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.11 0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/back_left_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="back_right_tyre_1">
+  <inertial>
+    <origin xyz="0.01110924369747908 -3.3306690738754696e-16 3.8163916471489756e-17" rpy="0 0 0"/>
+    <mass value="1.1738875109403615"/>
+    <inertia ixx="0.000947" iyy="0.00056" izz="0.00056" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.11 0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/back_right_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.11 0.13 -0.03" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/back_right_tyre_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="pgv_sensor_1">
+  <inertial>
+    <origin xyz="-8.421011784280792e-07 0.044135155660923665 -0.022313368834936925" rpy="0 0 0"/>
+    <mass value="1.9228814147546442"/>
+    <inertia ixx="0.001246" iyy="0.001105" izz="0.001572" ixy="0.0" iyz="-6e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.002126 0.04285 -0.1185" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/pgv_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.002126 0.04285 -0.1185" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://pnf_agv_description/meshes/pgv_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="front_left_joint" type="continuous">
+  <origin xyz="-0.11 0.13 0.03" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_left_tyre_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="front_right_joint" type="continuous">
+  <origin xyz="0.11 0.13 0.03" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_right_tyre_1"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="back_left_joint" type="continuous">
+  <origin xyz="-0.11 -0.13 0.03" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="back_left_tyre_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="back_right_joint" type="continuous">
+  <origin xyz="0.11 -0.13 0.03" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="back_right_tyre_1"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="pgv_joint" type="fixed">
+  <origin xyz="0.002126 -0.04285 0.1185" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="pgv_sensor_1"/>
+</joint>
+
+</robot>
